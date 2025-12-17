@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>College Web</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ABN&PRR College of Science Kovvur</title>
+	<style>
+		/* Always show vertical scrollbar (reserves space even when not needed) */
+html {
+  overflow-y: scroll;
+}
+
+/* Basic body reset so page fills viewport */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0,0,0,0.4);
+		}
+		.modal-content {
+			background-color: #fff;
+			margin: 10% auto;
+			padding: 24px;
+			border: 1px solid #888;
+			width: 80%;
+			max-width: 500px;
+			border-radius: 8px;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+		}
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.close:hover,
+		.close:focus {
+			color: #1a237e;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		body {
+			margin: 0;
+			font-family: 'Segoe UI', Arial, sans-serif;
+			background: #f4f6fa;
+			color: #222;
+		}
+		header {
+			background: #1a237e;
+			color: #fff;
+			padding: 24px 0 16px 0;
+			text-align: center;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		}
+		header h1 {
+			margin: 0;
+			font-size: 2.5rem;
+			letter-spacing: 2px;
+		}
+		nav {
+			margin-top: 16px;
+		}
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			margin: 0 10px;
+			font-weight: 500;
+			font-size: 1.1rem;
+			transition: background 0.2s, color 0.2s;
+			background: #3949ab;
+			border: none;
+			border-radius: 6px;
+			padding: 8px 18px;
+			display: inline-block;
+			box-shadow: 0 1px 4px rgba(26,35,126,0.08);
+		}
+		nav a:hover {
+			background: #ffd700;
+			color: #1a237e;
+		}
+		.hero {
+			background: linear-gradient(120deg, #e0eafc, #cfdef3);
+			padding: 48px 0 32px 0;
+			text-align: center;
+		}
+		.hero h2 {
+			font-size: 2.2rem;
+			color: #1a237e;
+			margin-bottom: 12px;
+		}
+		.hero p {
+			font-size: 1.2rem;
+			color: #333;
+			margin-bottom: 24px;
+		}
+		.cta-btn {
+			background: #1a237e;
+			color: #fff;
+			padding: 12px 32px;
+			border: none;
+			border-radius: 6px;
+			font-size: 1.1rem;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+		.cta-btn:hover {
+			background: #ffd700;
+			color: #1a237e;
+		}
+		section {
+			max-width: 900px;
+			margin: 40px auto;
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+			padding: 32px 28px;
+		}
+		section h2 {
+			color: #1a237e;
+			margin-bottom: 18px;
+		}
+		.about {
+			line-height: 1.7;
+		}
+		.courses-list {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 24px;
+		}
+		.course-card {
+			background: #f4f6fa;
+			border-radius: 8px;
+			box-shadow: 0 1px 6px rgba(26,35,126,0.08);
+			padding: 18px 14px;
+			text-align: center;
+		}
+		.course-card h3 {
+			color: #1a237e;
+			margin-bottom: 8px;
+		}
+		.admission-form label {
+			display: block;
+			margin-top: 12px;
+			color: #222;
+		}
+		.admission-form input,
+		.admission-form textarea {
+			width: 100%;
+			padding: 8px;
+			margin-top: 4px;
+			border: 1px solid #bbb;
+			border-radius: 4px;
+		}
+		.admission-form button {
+			margin-top: 18px;
+			background: #1a237e;
+			color: #fff;
+		 padding: 10px 24px;
+			border: none;
+			border-radius: 4px;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+		.admission-form button:hover {
+			background: #ffd700;
+			color: #1a237e;
+		}
+		.management-cards {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 24px;
+			justify-content: center;
+		}
+		.mgmt-card {
+			background: #f4f6fa;
+			border-radius: 8px;
+			box-shadow: 0 1px 6px rgba(26,35,126,0.08);
+			padding: 18px 24px;
+			min-width: 220px;
+			text-align: center;
+		}
+		.mgmt-card h3 {
+			color: #1a237e;
+			margin-bottom: 8px;
+		}
+		.contact-info {
+			margin-bottom: 18px;
+		}
+		.contact-form input, .contact-form textarea {
+			width: 100%;
+			padding: 8px;
+			margin-top: 4px;
+			border: 1px solid #bbb;
+			border-radius: 4px;
+		}
+		.contact-form button {
+			margin-top: 12px;
+			background: #1a237e;
+			color: #fff;
+			padding: 10px 24px;
+			border: none;
+			border-radius: 4px;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+		.contact-form button:hover {
+			background: #ffd700;
+			color: #1a237e;
+		}
+		.scroll-box {
+  height: 300px;      /* set desired height */
+  overflow: auto;     /* shows scrollbar when needed */
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+		/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+  border: 3px solid #f1f1f1; /* gives padding effect */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;            /* auto | thin | none */
+  scrollbar-color: #888 #f1f1f1;    /* thumb color, track color */
+}
+
+				/* Floating Home button style */
+				.home-btn {
+						position: fixed;
+						right: 18px;
+						bottom: 18px;
+						background: #1a237e;
+						color: #fff;
+						border: none;
+						padding: 12px 16px;
+						border-radius: 8px;
+						box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+						font-weight: 600;
+						cursor: pointer;
+						z-index: 2000;
+						transition: background 0.2s, transform 0.12s;
+				}
+				.home-btn:hover { background:#ffd700; color:#1a237e; transform: translateY(-2px); }
+	</style>
+	<script>
+		// Modal popup for management details
+function showModal(person) {
+    var modal = document.getElementById('mgmtModal');
+    var content = document.getElementById('mgmtModalContent');
+    var details = {
+        'Founder Chairman': `<strong>Sri Alluri Venkateswara Rao</strong><br>Sri. Alluri Venkateswara Rao garu is the second son of Smt. Suryakanthamma and Sri. Bapineedu garu. He was born on 07-07-1933. Upto SSLC he studied at Kovvur and Rajahmundry. During 1952-54 he studied intermediate at Sir CR Reddy College.<br><br>For the establishment of a degree college at Kovvur, he started AVR Trust in February 1999 and by August 1999 he started ABN & PRR college. Nearly Rupees Two Crores were spent for the construction of the buildings and other infrastructural facilities. The college was started in association with Sri. Pendyala Narendranadh Chowdary, Sri. Pendyala Venkata Krishna Rao Ex MLA of Kovvur and Sri. Pendyala Achuta Ramaiah of Dommeru.<br><br>Sri. Venkateswara Rao garu is having a very clear concept of the college, he has given more importance to standards of education and discipline in his college and he is magnanimous in all issues related to the college. His sudden demise on 25-06-2002 is a great loss not only to his family members but also to the staff and students of the college.`,
+        'Chairman': `<strong>Sri Alluri Indra Kumar</strong><br>Sri. Alluri Indra Kumar is the Present Chairman of "ABN & PRR College" and also Chairman of AVR Trust. Indra Kumar has taken over as Chairman of "ABN & PRR College, Kovvur" after the sad demise of his father Venkateswara Rao garu. As Chairman Indra Kumar has taken steps to start M.Sc., Organic Chemistry & Analytical Chemistry in the College.<br><br>Sri. Indra Kumar did his B.E., in Chemical Engineering from the University of Banglore. He is also the Managing Director of Avanthi Feeds Limited, one of the fastest growing organizations having turnover of Rs 2000Millions, the brain child of Sri Alluri Venkateswara Rao under his able guidance Avanthi Feeds has grown up with leaps & bounds by tie up with pingtai Enterprises Taiwan and Thai Union Feed Mill Co.Ltd., Thailand. Now Avanthi under his leadership has entered into the markets of USA, Europe, Japan & many countries all over the World.<br><br>Sri. Indra Kumar is Co-promoter and director of pat Kari power Pvt.Ltd., a 16MW Hydro-electric power station located in Himachal Pradesh & "Srivasta Power Pvt.Ltd.," 17.2MW Gas based Power Station located in Sivakodu., E.G Dist.,(A.P).<br><br>Sri. Indra Kumar is also governing body member of Vignan Jyothi Educational Institutions, Hyderbad. He is now the president of Sir C.R.R Educational Institutions, Eluru and his grand father late Alluri Bapineedu garu was the president of the Sir C.R.R College governing body for nearly 30 years.`,
+        'Secretary & Correspondent': `<strong>Sri N. Ram Prasad</strong><br>Sri N. Ram Prasad is the Secretary & Correspondent of A.B.N & P.R.R College of science. He is the son of renowned Scientist Sri Nuthakki Bhanu Prasad & Grand son of Sri Rama Seshaiah garu. His maternal grandfather is late Sri Pendyala Ranga Rao garu. He took B.Tech (Chemical Engg) from University of Madras during 1975-78. He did his Master Degree in Chemical Engineering at Western Reserve University Cleveland, OHIO, USA during 1978-80.<br><br>He is on the trustee Board of AVR trust and also Nuthakki Rama Seshaiah Memorial Trust. He is having membership in the following professional bodies…<br><ul><li>Confederation of Indian Industry (CII)</li><li>The Federation of Andhra Pradesh Chambers of Commerce and Industry (FAPCCI)</li><li>Andhra Chambers of Commerce</li><li>Hyderabad Management Association (HMA)</li></ul>`,
+        'Principal': `<strong>Dr. M. Ram Mohan</strong><br>Dr. M. Ram Mohan is the Present Principal of our College.<br><br>He has more than 25 Years of service excellence in Academic, Administration and Research. He served in Reputed Universities were (Bharathidasan University and Madurai Kamaraj University) & renowned Colleges in Tamilnadu & Bangalore. He had an opportunity worked in Abroad as a Research scientist in one of the Reputed, Renowned National Cancer Center, Singapore, affiliated with National university of Singapore.<br><br>He has handled projects in Cancer Gene Therapy and Pharmacogenomics.<br><br>He completed Doctoral degree in Nano Medical biotechnology from Madurai Kamaraj University, Madurai, Tamilnadu. He Published research papers with High Impact Journals & Presented research papers in International conferences are US, Singapore and Malaysia. He Completed B.Sc., M.Sc., M.Phil., & Ph.D., in Biotechnology.`,
+        'Academic Advisor': `<strong>N.V. Subba Rao</strong><br>N.V. Subba Rao was born on 08-11-36 in Kalarayanagudem of West Godavari District. After passing SSLC in 1953 he joined in Sir C.R Reddy College Eluru and passed B.Sc; in 1957. He took his Post Graduate Degree in Economics from B.R College, Agra (U.P).<br><br>He joined in Sir C. R. Reddy College as Lecturer in Economics in the year 1960 and retired as Principal of Sir C R Reddy college in Nov 1994. He worked as Administrative Officer of Sir C R Reddy institutions for two years and Principal of RITAMS Degree College, Tanuku for another two years. In April 1999 he joined as Principal of A.B.N & P.R.R College of Science, Kovvur.<br><br>His unstinted efforts for the development of the college have been continuing till today. He is the most successful principal who got utmost freedom & Liberty from the management to run the college in his style. He is loved & respected by each & every staff member of the college for his simplicity & the cordial relationship he maintains with them.<br><br>He treats the students as his children and he has an intuitive rapport with them. He encourages them & brings out the hidden talent.<br><br>He is a man of wise and firm determination who achieved success…`
+    };
+    content.innerHTML = details[person] || 'No details available.';
+    modal.style.display = 'block';
+}
+function closeModal() {
+    document.getElementById('mgmtModal').style.display = 'none';
+}
+window.onclick = function(event) {
+    var modal = document.getElementById('mgmtModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+
+// Smooth scroll for navigation links
+document.querySelectorAll('nav a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// Simple form validation for admission and contact forms
+document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+        var valid = true;
+        form.querySelectorAll('input[required], textarea[required]').forEach(function(input) {
+            if (!input.value.trim()) {
+                valid = false;
+                input.style.borderColor = 'red';
+            } else {
+                input.style.borderColor = '';
+            }
+        });
+        if (!valid) {
+            e.preventDefault();
+            alert('Please fill all required fields.');
+        }
+    });
+});
+	</script>
+</head>
+<body>
+	<header>
+	<img src="abn.jpg" style="height:70px;width:auto;margin-bottom:10px;vertical-align:middle;box-shadow:0 2px 8px rgba(0,0,0,0.10);border-radius:8px;">
+	<h1 style="display:inline-block;vertical-align:middle;margin-left:16px;">ABN&PRR COLLEGE OF SCIENCE KOVVUR</h1>
+		<nav>
+			<a href="#home">Home</a>
+			<a href="#about">About</a>
+			<a href="#courses">Courses</a>
+			<a href="#admission">Admission</a>
+			<a href="#founder">Founder</a>
+			<a href="#contact">Contact Us</a>
+			<a href="#admin">Admin Panel</a>
+			<a href="#management">Management</a>
+		</nav>
+	</header>
+	<div class="hero" id="home">
+		<h2>Welcome to ABN&PRR COLLEGE OF SCIENCE KOVVUR</h2>
+		<p>Your future begins here. Explore our programs, meet our faculty, and join a vibrant campus community.</p>
+		<button class="cta-btn" onclick="window.location='#admission'">Apply Now</button>
+	</div>
+	<section class="about" id="about">
+		<h2>About College</h2>
+		<p>ABN&PRR College of Science, Kovvur, is dedicated to academic excellence and holistic development. Established with a vision to empower students, our college offers a vibrant campus, experienced faculty, and a wide range of programs to help students achieve their goals.</p>
+	</section>
+	<section id="courses">
+		<h2>Courses & Programs</h2>
+		<div class="courses-list">
+			<div class="course-card">
+				<h3>B.Sc. Computer Science</h3>
+				<p>Learn programming, data science, and software development.</p>
+				<p><strong>Fees:</strong> ₹30,000 per year</p>
+			</div>
+			<div class="course-card">
+				<h3>B.Sc. Mathematics</h3>
+				<p>Explore advanced mathematics, statistics, and analytics.</p>
+				<p><strong>Fees:</strong> ₹30,000 per year</p>
+			</div>
+			<div class="course-card">
+				<h3>B.Sc. Chemistry</h3>
+				<p>Study organic, inorganic, and physical chemistry.</p>
+				<p><strong>Fees:</strong> ₹30,000 per year</p>
+			</div>
+			<div class="course-card">
+				<h3>B.Sc. Physics</h3>
+				<p>Understand the principles of physics, mechanics, and modern science.</p>
+				<p><strong>Fees:</strong> ₹30,000 per year</p>
+			</div>
+			<div class="course-card">
+				<h3>B.Com Computers</h3>
+				<p>Business, accounting, and computer applications for future professionals.</p>
+				<p><strong>Fees:</strong> ₹27,000 per year</p>
+			</div>
+			<div class="course-card">
+				<h3>B.Com General</h3>
+				<p>Comprehensive commerce education covering business, economics, and management.</p>
+				<p><strong>Fees:</strong> ₹25,000 per year</p>
+			</div>
+		</div>
+	</section>
+	<section id="admission">
+	<h2>Admission Form</h2>
+	<form class="admission-form" enctype="multipart/form-data" method="POST" action="register.php">
+			<label for="fullname">Full Name:</label>
+			<input type="text" id="fullname" name="fullname" required>
+			<label for="dob">Date of Birth:</label>
+			<input type="date" id="dob" name="dob" required>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+			<label for="phone">Phone:</label>
+			<input type="tel" id="phone" name="phone" required>
+			<label for="address">Address:</label>
+			<textarea id="address" name="address" rows="2" required></textarea>
+			<label for="course">Course Applying For:</label>
+			<input type="text" id="course" name="course" required>
+			<label for="qualifications">Previous Qualifications:</label>
+			<input type="text" id="qualifications" name="qualifications" required>
+			<label for="documents">Upload Documents:</label>
+			<input type="file" id="documents" name="documents" multiple required>
+			<button type="submit">Submit Admission</button>
+		</form>
+	</section>
+	<section id="management">
+		<h2>Management</h2>
+		<div class="management-cards">
+			<div class="mgmt-card">
+				<h3>Founder Chairman</h3>
+				<p>Sri Alluri Venkateswara Rao</p>
+				<button class="cta-btn" onclick="showModal('Founder Chairman')">View Details</button>
+			</div>
+			<div class="mgmt-card">
+				<h3>Chairman</h3>
+				<p>Sri Alluri Indra Kumar</p>
+				<button class="cta-btn" onclick="showModal('Chairman')">View Details</button>
+			</div>
+			<div class="mgmt-card">
+				<h3>Secretary &amp; Correspondent</h3>
+				<p>Sri N. Ram Prasadh</p>
+				<button class="cta-btn" onclick="showModal('Secretary & Correspondent')">View Details</button>
+			</div>
+			<div class="mgmt-card">
+				<h3>Principal</h3>
+				<p>Sri Dr. M. Ram Mohan</p>
+				<button class="cta-btn" onclick="showModal('Principal')">View Details</button>
+			</div>
+			<div class="mgmt-card">
+				<h3>Academic Advisor</h3>
+				<p>Sri N. V. Subba Rao</p>
+				<button class="cta-btn" onclick="showModal('Academic Advisor')">View Details</button>
+			</div>
+		</div>
+		<div id="mgmtModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<div id="mgmtModalContent"></div>
+			</div>
+		</div>
+	</section>
+	<section id="contact">
+		<h2>Contact Us</h2>
+		<div class="contact-info">
+			<p><strong>Phone:</strong> 08813-232907 (Office), 231466</p>
+			<p><strong>Email:</strong> <a href="mailto:office@abnprrcollege.edu.in">office@abnprrcollege.edu.in</a></p>
+		</div>
+		<form class="contact-form">
+			<input type="text" placeholder="Your Name" required>
+			<input type="email" placeholder="Your Email" required>
+			<textarea rows="4" placeholder="Your Message" required></textarea>
+			<button type="submit">Send Message</button>
+		</form>
+	</section>
+
+	<!-- Floating Home button -->
+	<button class="home-btn" onclick="goHome()" aria-label="Go to Home">Home</button>
+
+	<script>
+		// Smooth scroll to #home when Home button clicked
+		function goHome() {
+			var el = document.getElementById('home');
+			if (el) {
+				el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			} else {
+				window.location.hash = '#home';
+			}
+		}
+	</script>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fullname = $_POST["fullname"];
+    $dob = $_POST["dob"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $address = $_POST["address"];
+    $course = $_POST["course"];
+    $qualifications = $_POST["qualifications"];
+
+    // Save to file (registrations.txt)
+    $data = "$fullname, $dob, $email, $phone, $address, $course, $qualifications\n";
+    file_put_contents("register student.txt", $data, FILE_APPEND);
+
+    echo "<h2>Registration Successful!</h2>";
+    echo "<p>Thank you for registering, $fullname.</p>";
+    echo "<p>Your details have been saved.</p>";
+    echo "<a href='clgweb.html'>Back to Home</a>";
+} else {
+    echo "<h2>Invalid Request</h2>";
+}
+?>
+</body>
+</html>
